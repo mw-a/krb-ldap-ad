@@ -1,0 +1,1 @@
+dcpromo.exe /unattend /ReplicaOrNewDomain:Domain /NewDomain:Child /ChildName:subdom /NewDomainDNSName:subdom.ads.example.com /ParentDomainDNSName:ads.example.com /userdomain:ADS.EXAMPLE.COM /username:Administrator /password:P@ssw0rd /DomainNetBiosName:SUBDOM /ForestLevel:7 /DomainLevel:7 /SafeModeAdminPassword:P@ssw0rd /InstallDNS:no /RebootOnCompletion:yes
