@@ -26,6 +26,7 @@ d-i	partman/confirm_nooverwrite	boolean	true
 
 tasksel	tasksel/first	multiselect	desktop, standard, gnome-desktop, ssh-server
 d-i	pkgsel/upgrade	select	full-upgrade
+d-i	pkgsel/include	string	git
 
 popularity-contest	popularity-contest/participate	boolean	false
 
