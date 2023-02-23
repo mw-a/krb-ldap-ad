@@ -8,7 +8,7 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install nfs-common autofs
+apt-get -y install nfs-common autofs
 
 
 cat > /etc/idmapd.conf <<EOF 

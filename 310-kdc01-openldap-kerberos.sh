@@ -5,7 +5,7 @@
 systemctl stop slapd.service
 
 
-aptitude -y install ldap-utils libsasl2-modules-gssapi-mit
+apt-get -y install ldap-utils libsasl2-modules-gssapi-mit
 
 grep authz-regexp /etc/ldap/slapd.conf > /dev/null
 if [ $? != 0 ]; then

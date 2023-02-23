@@ -22,7 +22,7 @@ objectclass ( 1.2.826.0.1.3458854.2.1.1.1
             o $ description ) )
 EOF
 
-aptitude -y install krb5-kdc-ldap
+apt-get -y install krb5-kdc-ldap
 
 zcat /usr/share/doc/krb5-kdc-ldap/kerberos.schema.gz > /etc/ldap/schema/kerberos.schema
 

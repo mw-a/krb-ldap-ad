@@ -2,7 +2,7 @@
 [ `hostname -s` != 'lx02' ] && exit 1
 export DEBIAN_FRONTEND=noninteractive
 /sbin/hwclock --systohc
-aptitude  -y install krb5-user krb5-doc libsasl2-modules-gssapi-mit msktutil
+apt-get  -y install krb5-user krb5-doc libsasl2-modules-gssapi-mit msktutil
 
 cat > /etc/krb5.conf <<EOF
 [libdefaults]

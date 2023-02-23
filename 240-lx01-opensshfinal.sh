@@ -2,7 +2,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install ssh
+apt-get -y install ssh
 
 cat > /etc/ssh/ssh_config <<"EOF"
 Host *

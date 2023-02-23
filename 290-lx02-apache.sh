@@ -2,7 +2,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install apache2 libapache2-mod-auth-gssapi curl msktutil
+apt-get -y install apache2 libapache2-mod-auth-gssapi curl msktutil
 
 echo Testpage > /var/www/html/index.html
 

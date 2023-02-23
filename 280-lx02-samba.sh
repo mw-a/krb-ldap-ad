@@ -12,7 +12,7 @@ chmod 0700 /srv/home/*user*
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install samba winbind smbclient
+apt-get -y install samba winbind smbclient
 
 systemctl disable samba-ad-dc.service
 systemctl enable smbd.service
