@@ -1,7 +1,7 @@
 #!/bin/sh
 [ `hostname -s` != 'kdc01' ] && exit 1
 
-(for i in `seq -w 1 99`; do
+(for i in `seq -w 10 99`; do
 
 echo "dn: cn=group${i},ou=groups,dc=example,dc=com
 objectClass: posixGroup
@@ -27,7 +27,7 @@ loginShell: /bin/bash
 done ) | ldapadd -h localhost -D cn=root,dc=example,dc=com  -w P@ssw0rd 
  
 
-(for i in `seq -w 1 99`; do
+(for i in `seq -w 10 99`; do
   echo add_principal -pw P@ssw0rd user$i 
 done ) | kadmin.local
 
