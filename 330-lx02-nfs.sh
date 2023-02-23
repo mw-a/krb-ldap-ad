@@ -4,7 +4,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install nfs-common nfs-kernel-server msktutil
+apt-get -y install nfs-common nfs-kernel-server msktutil
 
 for i in `seq -w 1 99`; do
     mkdir -p /srv/home/user$i /srv/home/adsuser$i /srv/home/subuser$i

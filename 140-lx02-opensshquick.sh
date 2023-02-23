@@ -3,7 +3,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install ssh
+apt-get -y install ssh
 
 useradd -m adsuser
 
@@ -22,7 +22,7 @@ if [ $? != 0 ]; then
   echo 'P@ssw0rd' | kinit Administrator@ADS.EXAMPLE.COM  || \
     kinit Administrator@ADS.EXAMPLE.COM  
 
-  aptitude -y install ldap-utils libsasl2-modules-gssapi-mit
+  apt-get -y install ldap-utils libsasl2-modules-gssapi-mit
 
 
   echo "dn: cn=adsuser,cn=users,dc=ads,dc=example,dc=com

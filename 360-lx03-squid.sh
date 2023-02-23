@@ -4,7 +4,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install squid apache2-utils
+apt-get -y install squid apache2-utils
 
 #htpasswd -bc /etc/squid/passwd user P@ssw0rd
 

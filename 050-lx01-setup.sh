@@ -6,7 +6,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install krb5-user krb5-doc
+apt-get -y install krb5-user krb5-doc
 
 cat > /etc/krb5.conf <<EOF
 [libdefaults]

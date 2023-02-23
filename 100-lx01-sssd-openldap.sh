@@ -3,7 +3,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install sssd sssd-tools
+apt-get -y install sssd sssd-tools
 
 cat > /etc/sssd/sssd.conf <<"EOF"
 [sssd]

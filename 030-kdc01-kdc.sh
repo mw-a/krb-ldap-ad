@@ -20,7 +20,7 @@ cat > /etc/krb5.conf <<EOF
   .subdom.ads.example.com = SUBDOM.ADS.EXAMPLE.COM
 EOF
 
-DEBIAN_FRONTEND=noninteractive aptitude -y install krb5-user krb5-doc krb5-kdc krb5-admin-server
+DEBIAN_FRONTEND=noninteractive apt-get -y install krb5-user krb5-doc krb5-kdc krb5-admin-server
 
 
 /etc/init.d/krb5-kdc stop

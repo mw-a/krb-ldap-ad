@@ -3,10 +3,10 @@
 [ `hostname -s` != 'kdc01' ] && exit 1
 
 export DEBIAN_FRONTEND=noninteractive
-aptitude -y  purge slapd > /dev/null 2>&1
+apt-get -y  purge slapd > /dev/null 2>&1
 
 
-aptitude -y install slapd ldap-utils
+apt-get -y install slapd ldap-utils
 systemctl stop slapd
 
 rm -rvf /etc/ldap/slapd.d/  > /dev/null 2>&1

@@ -3,7 +3,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install ssh
+apt-get -y install ssh
 
 kadmin -p user/admin@EXAMPLE.COM <<EOF
 P@ssw0rd

@@ -3,7 +3,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install ldap-utils libsasl2-modules-gssapi-mit
+apt-get -y install ldap-utils libsasl2-modules-gssapi-mit
 
 export KRB5CCNAME=/tmp/krb5cc_create_ads_userdata.sh
 

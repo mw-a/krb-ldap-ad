@@ -4,7 +4,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-aptitude -y install ldap-utils
+apt-get -y install ldap-utils
 
 cat >  /etc/ldap/ldap.conf <<"EOF"
 BASE dc=example,dc=com
