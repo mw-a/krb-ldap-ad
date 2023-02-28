@@ -44,10 +44,12 @@ cat > /etc/samba/smb.conf <<"EOF"
   path = /srv/home/%u
 EOF
 
-
-msktutil update --enctypes 0x10 --set-samba-secret
-
+# recreates secrets.tdb and stores domain SID as side-effect
 SID=`net rpc getsid -S adskdc01 |awk '{print $3}'`
+
+tdbtool /var/lib/samba/private/secrets.tdb store SECRETS/MACHINE_LAST_CHANGE_TIME/ADS '\A5\0\0\0'
+tdbtool /var/lib/samba/private/secrets.tdb store SECRETS/MACHINE_PASSWORD/ADS 'dummy\0'
+adcli update --add-samba-data --computer-password-lifetime=0
 
 systemctl start smbd.service
 systemctl start nmbd.service

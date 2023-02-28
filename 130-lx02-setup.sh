@@ -2,7 +2,7 @@
 [ `hostname -s` != 'lx02' ] && exit 1
 export DEBIAN_FRONTEND=noninteractive
 /sbin/hwclock --systohc
-apt-get  -y install krb5-user krb5-doc libsasl2-modules-gssapi-mit msktutil
+apt-get  -y install krb5-user krb5-doc libsasl2-modules-gssapi-mit adcli
 
 cat > /etc/krb5.conf <<EOF
 [libdefaults]
@@ -22,11 +22,9 @@ cat > /etc/krb5.conf <<EOF
 EOF
 
 
-echo P@ssw0rd | kinit Administrator
+echo P@ssw0rd | adcli join -D ads.example.com -U administrator --stdin-password
 
-msktutil create --enctypes 0x10
-
-kinit -k 'lx02$@ADS.EXAMPLE.COM'
+kinit -k 'LX02$@ADS.EXAMPLE.COM'
 kvno -k /etc/krb5.keytab host/lx02.ads.example.com@ADS.EXAMPLE.COM
 klist
 kdestroy
