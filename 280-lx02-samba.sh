@@ -45,7 +45,7 @@ cat > /etc/samba/smb.conf <<"EOF"
 EOF
 
 
-msktutil update --enctypes 0x10 --set-samba-secret
+adcli update --add-samba-data
 
 SID=`net rpc getsid -S adskdc01 |awk '{print $3}'`
 

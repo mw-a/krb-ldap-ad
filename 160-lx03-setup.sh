@@ -2,7 +2,7 @@
 [ `hostname -s` != 'lx03' ] && exit 1
 export DEBIAN_FRONTEND=noninteractive
 /sbin/hwclock --systohc
-apt-get  -y install krb5-user krb5-doc libsasl2-modules-gssapi-mit msktutil
+apt-get  -y install krb5-user krb5-doc libsasl2-modules-gssapi-mit adcli
 
 cat > /etc/krb5.conf <<EOF
 [libdefaults]
@@ -24,9 +24,7 @@ cat > /etc/krb5.conf <<EOF
 EOF
 
 
-echo P@ssw0rd | kinit Administrator
-
-msktutil create --enctypes 0x10
+echo P@ssw0rd | adcli -D ads.example.com -U administrator --stdin-password
 
 kinit -k 'lx03$@SUBDOM.ADS.EXAMPLE.COM'
 kvno -k /etc/krb5.keytab host/lx03.subdom.ads.example.com@SUBDOM.ADS.EXAMPLE.COM
