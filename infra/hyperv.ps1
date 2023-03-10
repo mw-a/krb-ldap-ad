@@ -117,7 +117,7 @@ New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\win01 -Name Hos
 New-Item -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\adskdc02
 New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\adskdc02 -Name HostName -PropertyType String -Value adskdc02.subdom.ads.example.com
 New-Item -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03
-New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03 -Name HostName -PropertyType String -Value lx03.example.com
+New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03 -Name HostName -PropertyType String -Value lx03.subdom.ads.example.com
 
 $wzfile = "WinSCP-5.21.7-Setup.exe"
 $wzurl = "https://altushost-swe.dl.sourceforge.net/project/winscp/WinSCP/5.21.7/{0}" -f $wzfile
@@ -138,7 +138,7 @@ New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\win01" -
 New-Item -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\adskdc02"
 New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\adskdc02" -Name HostName -PropertyType String -Value adskdc02.subdom.ads.example.com
 New-Item -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx03"
-New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx03" -Name HostName -PropertyType String -Value lx03.example.com
+New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx03" -Name HostName -PropertyType String -Value lx03.subdom.ads.example.com
 
 $dir = [Environment]::GetFolderPath("Desktop")
 $wscript = New-Object -ComObject ("WScript.Shell")
