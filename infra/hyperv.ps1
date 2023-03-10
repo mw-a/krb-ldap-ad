@@ -130,7 +130,7 @@ New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx02 -Name Host
 #New-Item -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\adskdc02
 #New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\adskdc02 -Name HostName -PropertyType String -Value adskdc02.subdom.ads.example.com
 New-Item -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03
-New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03 -Name HostName -PropertyType String -Value lx03.example.com
+New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03 -Name HostName -PropertyType String -Value lx03.subdom.ads.example.com
 
 $wzfile = "WinSCP-5.21.7-Setup.exe"
 $wzurl = "https://altushost-swe.dl.sourceforge.net/project/winscp/WinSCP/5.21.7/{0}" -f $wzfile
@@ -154,7 +154,7 @@ New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx02" -N
 #New-Item -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\adskdc02"
 #New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\adskdc02" -Name HostName -PropertyType String -Value adskdc02.subdom.ads.example.com
 New-Item -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx03"
-New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx03" -Name HostName -PropertyType String -Value lx03.example.com
+New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx03" -Name HostName -PropertyType String -Value lx03.subdom.ads.example.com
 
 $gitfile = "Git-2.40.1-64-bit.exe"
 $giturl = "https://github.com/git-for-windows/git/releases/download/v2.40.1.windows.1/{0}" -f $gitfile
