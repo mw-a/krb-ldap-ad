@@ -19,16 +19,15 @@ givenname: user${i}
 uid: user${i}
 uidNumber: `echo $i + 10000 | bc`
 gidNumber: `echo $i + 10000 | bc`
-gecos: Beispielnutzer $i
+gecos: Example user $i
 homeDirectory: /nfshome/user${i}
 loginShell: /bin/bash
 "
 
-done ) | ldapadd -h localhost -D cn=root,dc=example,dc=com  -w P@ssw0rd 
- 
+done ) | ldapadd -h localhost -D cn=root,dc=example,dc=com  -w P@ssw0rd
 
 (for i in `seq -w 10 99`; do
-  echo add_principal -pw P@ssw0rd user$i 
+  echo add_principal -pw P@ssw0rd user$i
 done ) | kadmin.local
 
 
