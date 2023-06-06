@@ -16,7 +16,7 @@ useradd -m user01
 useradd -m user02
 useradd -m user03
 
-sed -i -e 's/^.*GSSAPIAuthentication.*$/GSSAPIAuthentication yes/' /etc/ssh/sshd_config
+echo GSSAPIAuthentication yes > /etc/ssh/sshd_config.d/gssapi.conf
 
 mkdir -p /var/run/sshd
 /etc/init.d/ssh restart

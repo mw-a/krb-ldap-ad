@@ -7,7 +7,7 @@ apt-get -y install ssh
 
 useradd -m adsuser
 
-sed -i -e 's/^.*GSSAPIAuthentication.*$/GSSAPIAuthentication yes/' /etc/ssh/sshd_config
+echo GSSAPIAuthentication yes > /etc/ssh/sshd_config.d/gssapi.conf
 
 mkdir -p /var/run/sshd
 /etc/init.d/ssh restart
@@ -16,11 +16,11 @@ mkdir -p /var/run/sshd
 export KRB5CCNAME=/tmp/krb5cc_opensshquick
 
 echo 'P@ssw0rd' | kinit adsuser@ADS.EXAMPLE.COM
-klist -s 
+klist -s
 if [ $? != 0 ]; then
 
   echo 'P@ssw0rd' | kinit Administrator@ADS.EXAMPLE.COM  || \
-    kinit Administrator@ADS.EXAMPLE.COM  
+    kinit Administrator@ADS.EXAMPLE.COM
 
   apt-get -y install ldap-utils libsasl2-modules-gssapi-mit
 
@@ -37,7 +37,7 @@ sAMAccountName: adsuser
 userPrincipalName: adsuser@ADS.EXAMPLE.COM
 unicodePwd:: IgBQAEAAcwBzAHcAMAByAGQAIgA=
 
-" | ldapadd -c -Y GSSAPI -h adskdc01.ads.example.com  
+" | ldapadd -c -Y GSSAPI -h adskdc01.ads.example.com
 
 
   kdestroy
