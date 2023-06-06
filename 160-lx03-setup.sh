@@ -19,8 +19,6 @@ cat > /etc/krb5.conf <<EOF
   .ads.example.com = ADS.EXAMPLE.COM
   subdom.ads.example.com = SUBDOM.ADS.EXAMPLE.COM
   .subdom.ads.example.com = SUBDOM.ADS.EXAMPLE.COM
-  subdom.ads.example.com = SUBDOM.ADS.EXAMPLE.COM
-  .subdom.ads.example.com = SUBDOM.ADS.EXAMPLE.COM
 EOF
 
 
