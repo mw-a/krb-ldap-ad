@@ -17,7 +17,7 @@ if [ $? != 0 ]; then
 fi
 
 
-(for i in `seq -w 1 99`; do
+(for i in `seq -w 10 99`; do
 
 echo "dn: cn=adsgroup${i},cn=users,dc=ads,dc=example,dc=com
 objectClass: Group
