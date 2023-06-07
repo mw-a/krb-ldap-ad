@@ -10,7 +10,7 @@ cat > /etc/sssd/sssd.conf <<EOF
 [sssd]
 config_file_version = 2
 services = nss, pam
-domains = EXAMPLE.COM, ADS.EXAMPLE.COM, SUBDOM.ADS.EXAMPLE.COM
+domains = EXAMPLE.COM, ADS.EXAMPLE.COM
 
 [domain/EXAMPLE.COM]
 id_provider = ldap
@@ -25,39 +25,14 @@ krb5_server = kdc01.example.com
 krb5_validate = true
 
 [domain/ADS.EXAMPLE.COM]
-id_provider = ldap
-ldap_uri = ldap://adskdc01.ads.example.com
-ldap_search_base = dc=ads,dc=example,dc=com
-ldap_schema = rfc2307bis
-ldap_sasl_mech = GSSAPI
+id_provider = ad
 min_id = 20001
-max_id = 30000
-auth_provider = krb5
-krb5_realm = ADS.EXAMPLE.COM
-krb5_server = adskdc01.ads.example.com
-ldap_group_object_class = Group
-ldap_user_object_class = User
-ldap_user_home_directory = unixHomeDirectory
-krb5_validate = true
-
-[domain/SUBDOM.ADS.EXAMPLE.COM]
-id_provider = ldap
-ldap_uri = ldap://adskdc02.subdom.ads.example.com
-ldap_search_base = dc=subdom,dc=ads,dc=example,dc=com
-ldap_schema = rfc2307bis
-ldap_sasl_mech = GSSAPI
-min_id = 30001
 max_id = 40000
-auth_provider = krb5
-krb5_realm = SUBDOM.ADS.EXAMPLE.COM
-krb5_server = adskdc02.subdom.ads.example.com
-ldap_group_object_class = Group
-ldap_user_object_class = User
-ldap_user_home_directory = unixHomeDirectory
-krb5_validate = true
+auth_provider = ad
+ldap_id_mapping = False
 
-
-
+[domain/ADS.EXAMPLE.COM/SUBDOM.ADS.EXAMPLE.COM]
+use_fully_qualified_names = False
 EOF
 chmod 0600 /etc/sssd/sssd.conf
 
@@ -85,7 +60,7 @@ userAccountControl: 4128
 sAMAccountName: LX01\$
 altSecurityIdentities: Kerberos:host/lx01.example.com@EXAMPLE.COM
 
-" | ldapadd -c -Y GSSAPI -h adskdc01.ads.example.com  
+" | ldapadd -c -Y GSSAPI -h adskdc01.ads.example.com
 kdestroy
 
 sleep 3
