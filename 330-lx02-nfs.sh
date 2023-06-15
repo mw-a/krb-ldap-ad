@@ -6,7 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get -y install nfs-common nfs-kernel-server msktutil
 
-for i in `seq -w 1 99`; do
+for i in `seq -w 10 99`; do
     mkdir -p /srv/home/user$i /srv/home/adsuser$i /srv/home/subuser$i
     chown user$i:group$i /srv/home/user$i
     chown adsuser$i:adsgroup$i /srv/home/adsuser$i
@@ -22,8 +22,7 @@ cat > /etc/exports <<EOF
 /srv/home *(rw,subtree_check,sec=krb5i,sec=krb5p)
 EOF
 
-
-cat > /etc/idmapd.conf <<EOF 
+cat > /etc/idmapd.conf <<EOF
 [General]
 
 Verbosity = 0
@@ -38,8 +37,5 @@ Nobody-User = nobody
 Nobody-Group = nogroup
 EOF
 
-
 systemctl stop nfs-server.service > /dev/null 2>&1
 systemctl start nfs-server.service
-
-
