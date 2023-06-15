@@ -10,7 +10,7 @@ cat > /usr/lib/cgi-bin/krb5-test.cgi <<"EOF"
 #!/bin/bash
 echo "Content-type: text/plain"
 echo ""
-echo "Hallo, $REMOTE_USER"
+echo "Hello, $REMOTE_USER"
 EOF
 
 chmod +x /usr/lib/cgi-bin/krb5-test.cgi
