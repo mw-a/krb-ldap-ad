@@ -23,4 +23,5 @@ apt-get install -y -d ssh samba ldap-utils libsasl2-modules-gssapi-mit     \
    openjdk-11-demo openjdk-11-doc openjdk-11-jdk openjdk-11-jre            \
    sasl2-bin autoconf                                                      \
    curl smbclient libkrb5-dev libldap2-dev g++ git bison kstart            \
-   libapache2-mod-auth-gssapi libsasl2-dev emacs emacs-nox msktutil adcli autofs
+   libapache2-mod-auth-gssapi libsasl2-dev emacs emacs-nox msktutil adcli  \
+   autofs gssproxy
