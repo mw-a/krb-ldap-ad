@@ -7,7 +7,7 @@ apt-get -y purge unattended-upgrades packagekit libnss-myhostname firefox
 
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get update
+apt-get update -o Acquire::Check-Valid-Until=false
 apt-get -y autoremove --purge
 apt-get -y dist-upgrade
 apt-get -y autoremove --purge
@@ -25,3 +25,13 @@ apt-get install -y -d ssh samba ldap-utils libsasl2-modules-gssapi-mit     \
    curl smbclient libkrb5-dev libldap2-dev g++ git bison kstart            \
    libapache2-mod-auth-gssapi libsasl2-dev emacs emacs-nox msktutil adcli  \
    autofs gssproxy
+
+echo deb https://snapshot.debian.org/archive/debian/20210925T203230Z/ testing main > /etc/apt/sources.list.d/testing.list
+apt-get update -o Acquire::Check-Valid-Until=false
+cat << EOF > /etc/apt/preferences.d/testing
+Package: *
+Pin: release a=testing
+Pin-Priority: 250
+EOF
+
+apt-get install -y -d -t testing sssd sssd-tools
