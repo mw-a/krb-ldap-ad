@@ -2,7 +2,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get -y install gssproxy
+apt-get -y install gssproxy msktutil
 
 cat > /etc/krb5.conf <<EOF
 [libdefaults]
