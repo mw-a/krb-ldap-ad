@@ -28,7 +28,7 @@ EOF
 
 
 echo "/nfshome /etc/auto.nfshome" > /etc/auto.master
-echo '* -fstype=nfs,rw,async,vers=4.0,sec=krb5p lx02:/srv/home/&'  > /etc/auto.nfshome
+echo '* -fstype=nfs,rw,async,sec=krb5 lx02:/srv/home/&'  > /etc/auto.nfshome
 
 systemctl stop autofs.service > /dev/null 2>&1
 systemctl start autofs.service

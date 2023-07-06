@@ -6,6 +6,9 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get -y install nfs-common nfs-kernel-server msktutil
 
+# gssproxy disables rpc-svcgssd and requires configuration
+apt-get -y remove gssproxy
+
 for i in `seq -w 10 99`; do
     mkdir -p /srv/home/user$i /srv/home/adsuser$i /srv/home/subuser$i
     chown user$i:group$i /srv/home/user$i
@@ -19,7 +22,7 @@ msktutil --update --enctypes 0x10 --set-samba-secret --service nfs
 kdestroy
 
 cat > /etc/exports <<EOF
-/srv/home *(rw,subtree_check,sec=krb5i,sec=krb5p)
+/srv/home *(rw,subtree_check,sec=krb5)
 EOF
 
 cat > /etc/idmapd.conf <<EOF
