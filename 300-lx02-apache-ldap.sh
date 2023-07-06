@@ -10,6 +10,7 @@ cat > /etc/apache2/sites-available/default-krb5.conf <<"EOF"
 <Location />
     AuthType GSSAPI
     AuthName "GSSAPI Single Sign On Login"
+    GssapiCredStore keytab:/etc/apache2/krb5.keytab
     #require valid-user
     AuthLDAPURL "ldap://adskdc01.ads.example.com/dc=ads,dc=example,dc=com?userPrincipalName?sub"
     AuthLDAPBindDN "CN=adsuser99,CN=Users,DC=ads,DC=example,DC=com"
