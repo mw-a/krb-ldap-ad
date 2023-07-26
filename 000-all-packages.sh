@@ -20,7 +20,7 @@ apt-get install -y -d ssh samba ldap-utils libsasl2-modules-gssapi-mit     \
    krb5-pkinit wireshark winbind sssd sssd-tools                           \
    krb5-kdc-ldap krb5-k5tls krb5-kpropd krb5-otp slapd unixodbc            \
    vim sssd sssd-ad libpam-sss libnss-sss                                  \
-   default-jdk                                                             \
+   default-jdk screen tmux                                                 \
    sasl2-bin autoconf                                                      \
    curl smbclient libkrb5-dev libldap2-dev g++ git bison kstart            \
    libapache2-mod-auth-gssapi libsasl2-dev emacs emacs-nox msktutil adcli  \
