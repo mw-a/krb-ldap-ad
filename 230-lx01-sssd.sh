@@ -44,7 +44,7 @@ echo P@ssw0rd |kinit Administrator@ADS.EXAMPLE.COM
 echo "dn: cn=lx01,cn=computers,dc=ads,dc=example,dc=com
 changetype: delete
 
-" | ldapadd -c -Y GSSAPI -h adskdc01.ads.example.com   2>/dev/null
+" | ldapadd -c -Y GSSAPI -H ldap://adskdc01.ads.example.com 2>/dev/null
 
 echo "dn: cn=lx01,cn=computers,dc=ads,dc=example,dc=com
 changetype: add
@@ -60,7 +60,7 @@ userAccountControl: 4128
 sAMAccountName: LX01\$
 altSecurityIdentities: Kerberos:host/lx01.example.com@EXAMPLE.COM
 
-" | ldapadd -c -Y GSSAPI -h adskdc01.ads.example.com
+" | ldapadd -c -Y GSSAPI -H ldap://adskdc01.ads.example.com
 kdestroy
 
 sleep 3

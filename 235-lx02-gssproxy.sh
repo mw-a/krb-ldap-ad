@@ -25,7 +25,7 @@ EOF
 echo P@ssw0rd | kinit Administrator
 msktutil create --use-service-account --service gssproxy/lx02 --keytab /etc/gssproxy/krb5.keytab --account-name srv-gssproxy
 
-ldapmodify -h adskdc01 << EOF
+ldapmodify -H ldap://adskdc01 << EOF
 dn: cn=srv-gssproxy,cn=users,dc=ads,dc=example,dc=com
 changetype: modify
 replace: userAccountControl
@@ -59,4 +59,4 @@ systemctl enable gssproxy
 systemctl restart gssproxy
 
 su - adsuser42 -c "kdestroy"
-su - adsuser32 -c "GSS_USE_PROXY=yes ldapsearch -h adskdc01 -LLL -b dc=ads,dc=example,dc=com samaccountname=adsuser42 cn"
+su - adsuser32 -c "GSS_USE_PROXY=yes ldapsearch -H ldap://adskdc01 -LLL -b dc=ads,dc=example,dc=com samaccountname=adsuser42 cn"

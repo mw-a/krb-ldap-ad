@@ -37,7 +37,7 @@ sAMAccountName: adsuser
 userPrincipalName: adsuser@ADS.EXAMPLE.COM
 unicodePwd:: IgBQAEAAcwBzAHcAMAByAGQAIgA=
 
-" | ldapadd -c -Y GSSAPI -h adskdc01.ads.example.com
+" | ldapadd -c -Y GSSAPI -H ldap://adskdc01.ads.example.com
 
 
   kdestroy

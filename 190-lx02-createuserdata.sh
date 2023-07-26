@@ -54,7 +54,7 @@ homeDirectory: \\\\\\\\lx02\\\\adsuser${i}
 homeDrive: x:
 " 
 
-done ) | ldapadd -c -Y GSSAPI -h adskdc01.ads.example.com  
+done ) | ldapadd -c -Y GSSAPI -H ldap://adskdc01.ads.example.com
 
 kdestroy
 

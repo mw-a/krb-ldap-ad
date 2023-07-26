@@ -24,7 +24,7 @@ homeDirectory: /nfshome/user${i}
 loginShell: /bin/bash
 "
 
-done ) | ldapadd -h localhost -D cn=root,dc=example,dc=com  -w P@ssw0rd
+done ) | ldapadd -H ldap://localhost -D cn=root,dc=example,dc=com -w P@ssw0rd
 
 (for i in `seq -w 10 99`; do
   echo add_principal -pw P@ssw0rd user$i
