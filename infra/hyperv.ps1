@@ -9,6 +9,7 @@ Set-DnsClientServerAddress -InterfaceAlias "vEthernet (LabServicesSwitch)" -Serv
 Set-DnsClientGlobalSetting -SuffixSearchList @("example.com", "ads.example.com", "subdom.ads.example.com")
 
 $domain = "example.com"
+Remove-DnsServerZone -Name $domain -Force
 Add-DnsServerPrimaryZone -Name $domain -DynamicUpdate NonsecureAndSecure -ZoneFile ("{0}.dns" -f $domain)
 $soa = Get-DNSServerResourceRecord -RRType SOA -ZoneName $domain
 $newsoa = $soa.Clone()
@@ -16,6 +17,7 @@ $newsoa.RecordData.PrimaryServer = "hyperv.example.com."
 Set-DnsServerResourceRecord -NewInputObject $newsoa -OldInputObject $soa -ZoneName $domain
 
 $revdomain = "200.168.192.in-addr.arpa"
+Remove-DnsServerZone -Name $revdomain -Force
 Add-DnsServerPrimaryZone -NetworkID 192.168.200.0/24 -ZoneFile ("{0}.dns" -f $revdomain)
 $soa = Get-DNSServerResourceRecord -RRType SOA -ZoneName $revdomain
 $newsoa = $soa.Clone()
@@ -34,6 +36,11 @@ Add-DnsServerResourceRecordA -Name "lx03.subdom.ads" -ZoneName $domain -IPv4Addr
 Set-DhcpServerV4Scope -ScopeId 192.168.200.0 -StartRange 192.168.200.100 -EndRange 192.168.200.220
 Set-DhcpServerv4Scope -ScopeId 192.168.200.0 -StartRange 192.168.200.200 -EndRange 192.168.200.220
 Set-DhcpServerV4OptionValue -ScopeId 192.168.200.0 -DnsServer 192.168.200.1
+
+for ($i = 102; $i -le 108; $i++) {
+	Remove-DhcpServerV4Reservation -IPAddress 192.168.200.$i
+}
+
 Add-DhcpServerV4Reservation -ScopeId 192.168.200.0 -Type "DHCP" -ClientId "00-15-5d-00-05-01" -IPAddress 192.168.200.102 -Name ("kdc01.{0}" -f $domain)
 Add-DhcpServerV4Reservation -ScopeId 192.168.200.0 -Type "DHCP" -ClientId "00-15-5d-00-05-02" -IPAddress 192.168.200.103 -Name ("lx01.{0}" -f $domain)
 Add-DhcpServerV4Reservation -ScopeId 192.168.200.0 -Type "DHCP" -ClientId "00-15-5d-00-05-03" -IPAddress 192.168.200.104 -Name ("lx02.{0}" -f $domain)
@@ -51,6 +58,13 @@ Remove-Item -Path ("{0}\Microsoft\Windows\Virtual Hard Disks\Linux01.vhdx" -f $e
 Remove-Item -Path ("{0}\Microsoft\Windows\Virtual Hard Disks\W11.vhdx" -f $env:PROGRAMDATA)
 
 Remove-Item "c:\install\ubuntu-22.10-live-server-amd64.iso"
+
+$vms = 'kdc01', 'lx01', 'lx02', 'adskdc01', 'win01', 'adskdc02', 'lx03'
+foreach ($vm in $vms) {
+	Stop-VM -Name $vm -Force
+	Remove-VM -Name $vm -Force
+	Remove-Item -Path ("{0}\Microsoft\Windows\Virtual Hard Disks\{1}.vhdx" -f $env:PROGRAMDATA, $vm)
+}
 
 $install = "c:\install"
 #$isoname = "debian-11.6.0-amd64-netinst.iso"
@@ -114,6 +128,7 @@ $putty = "{0}\{1}" -f ($install, $ptmsi)
 Start-BitsTransfer -Source $pturl -Destination $putty
 Start-Process -Wait -FilePath msiexec -ArgumentList @("/passive", "/i", $putty)
 
+Remove-Item -Path HKCU:\Software\SimonTatham -Recurse
 New-Item -Path HKCU:\Software\SimonTatham
 New-Item -Path HKCU:\Software\SimonTatham\PuTTY
 New-Item -Path HKCU:\Software\SimonTatham\PuTTY\Sessions
@@ -138,6 +153,7 @@ $winzip = "{0}\{1}" -f ($install, $wzfile)
 Start-BitsTransfer -Source $wzurl -Destination $winzip
 Start-Process -Wait -FilePath $winzip -ArgumentList @("/silent", "/allusers")
 
+Remove-Item -Path "HKCU:\Software\Martin Prikryl" -Recurse
 New-Item -Path "HKCU:\Software\Martin Prikryl"
 New-Item -Path "HKCU:\Software\Martin Prikryl\WinSCP 2"
 New-Item -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions"
@@ -162,7 +178,14 @@ $git = "{0}\{1}" -f ($install, $gitfile)
 Start-BitsTransfer -Source $giturl -Destination $git
 Start-Process -Wait -FilePath $git -ArgumentList @("/verysilent")
 
-& 'C:\Program Files\Git\bin\git' clone https://github.com/mw-a/krb-ldap-ad c:\users\workshop\desktop\krb-ldap-ad
+$git = 'C:\Program Files\Git\bin\git'
+$repodir = 'c:\users\workshop\desktop\krb-ldap-ad'
+if (Test-Path -Path $repodir) {
+	Set-Location -Path $repodir
+	& $git pull
+} else {
+	& $git clone https://github.com/mw-a/krb-ldap-ad $repodir
+}
 
 $dir = [Environment]::GetFolderPath("Desktop")
 $wscript = New-Object -ComObject ("WScript.Shell")
