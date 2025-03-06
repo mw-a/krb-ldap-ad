@@ -59,9 +59,9 @@ $netinst = "{0}\{1}" -f ($install, $isoname)
 #$niurl = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/{0}" -f $isoname
 #Start-BitsTransfer -Source $niurl -Destination $netinst
 
-$adskdcinst = "{0}\en-us_windows_server_2022_updated_jan_2023_x64_dvd_2897e63d.iso" -f $install
+$adskdcinst = "{0}\26100.1742.240906-0331.ge_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso" -f $install
 $adskdc01au = "{0}\adskdc01-autounattend.iso" -f $install
-$wininst = "{0}\en-us_windows_11_business_editions_version_22h2_updated_jan_2023_x64_dvd_1e679bd9.iso " -f $install
+$wininst = "{0}\Win11_24H2_English_x64.iso" -f $install
 $win01au = "{0}\win01-autounattend.iso" -f $install
 $adskdc02au = "{0}\adskdc02-autounattend.iso" -f $install
 
@@ -108,7 +108,7 @@ $dvd = Add-VMDvdDrive -VM $lx03 -Path $netinst -Passthru
 Set-VMFirmware -VM $lx03 -FirstBootDevice $dvd -SecureBootTemplate MicrosoftUEFICertificateAuthority
 Set-VMNetworkAdapter -VM $lx03 -StaticMacAddress "00:15:5d:00:05:07"
 
-$ptmsi = "putty-64bit-0.78-installer.msi"
+$ptmsi = "putty-64bit-0.83-installer.msi"
 $pturl = "https://the.earth.li/~sgtatham/putty/latest/w64/{0}" -f $ptmsi
 $putty = "{0}\{1}" -f ($install, $ptmsi)
 Start-BitsTransfer -Source $pturl -Destination $putty
@@ -132,8 +132,8 @@ New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx02 -Name Host
 New-Item -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03
 New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03 -Name HostName -PropertyType String -Value lx03.subdom.ads.example.com
 
-$wzfile = "WinSCP-5.21.7-Setup.exe"
-$wzurl = "https://altushost-swe.dl.sourceforge.net/project/winscp/WinSCP/5.21.7/{0}" -f $wzfile
+$wzfile = "WinSCP-6.3.7-Setup.exe"
+$wzurl = "https://altushost-swe.dl.sourceforge.net/project/winscp/WinSCP/6.3.7/{0}" -f $wzfile
 $winzip = "{0}\{1}" -f ($install, $wzfile)
 Start-BitsTransfer -Source $wzurl -Destination $winzip
 Start-Process -Wait -FilePath $winzip -ArgumentList @("/silent", "/allusers")
@@ -156,8 +156,8 @@ New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx02" -N
 New-Item -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx03"
 New-ItemProperty -Path "HKCU:\Software\Martin Prikryl\WinSCP 2\Sessions\lx03" -Name HostName -PropertyType String -Value lx03.subdom.ads.example.com
 
-$gitfile = "Git-2.40.1-64-bit.exe"
-$giturl = "https://github.com/git-for-windows/git/releases/download/v2.40.1.windows.1/{0}" -f $gitfile
+$gitfile = "Git-2.48.1-64-bit.exe"
+$giturl = "https://github.com/git-for-windows/git/releases/download/v2.48.1.windows.1/{0}" -f $gitfile
 $git = "{0}\{1}" -f ($install, $gitfile)
 Start-BitsTransfer -Source $giturl -Destination $git
 Start-Process -Wait -FilePath $git -ArgumentList @("/verysilent")
