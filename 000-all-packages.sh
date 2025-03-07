@@ -5,6 +5,9 @@ systemctl stop apt-daily.timer
 
 apt-get -y purge unattended-upgrades packagekit libnss-myhostname firefox
 
+# remove old kernel left by installer
+apt-get -y purge $(dpkg-query -W -f='${Package}\n' linux-image-[0-9].* | head -1)
+
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get update

@@ -24,9 +24,9 @@ d-i	partman/choose_partition	select	finish
 d-i	partman/confirm	boolean	true
 d-i	partman/confirm_nooverwrite	boolean	true
 
-tasksel	tasksel/first	multiselect	desktop, standard, gnome-desktop, ssh-server
+tasksel	tasksel/first	multiselect	ssh-server
 d-i	pkgsel/upgrade	select	full-upgrade
-d-i	pkgsel/include	string	git
+d-i	pkgsel/include	string	git gnome-core
 
 popularity-contest	popularity-contest/participate	boolean	false
 
