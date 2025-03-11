@@ -1,6 +1,8 @@
+#!/bin/bash
+
 [ `hostname -s` != 'lx02' ] && exit 1
 
-for i in `seq -w 10 99`; do
+for i in {10..99} ; do
     mkdir -p /srv/home/user$i /srv/home/adsuser$i /srv/home/subuser$i
     chown user$i:group$i /srv/home/user$i
     chown adsuser$i:adsgroup$i /srv/home/adsuser$i

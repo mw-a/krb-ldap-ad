@@ -9,7 +9,7 @@ apt-get -y install nfs-common nfs-kernel-server msktutil
 # gssproxy disables rpc-svcgssd and requires configuration
 apt-get -y remove gssproxy
 
-for i in `seq -w 10 99`; do
+for i in {10..99} ; do
     mkdir -p /srv/home/user$i /srv/home/adsuser$i /srv/home/subuser$i
     chown user$i:group$i /srv/home/user$i
     chown adsuser$i:adsgroup$i /srv/home/adsuser$i
