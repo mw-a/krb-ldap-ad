@@ -57,7 +57,7 @@ Remove-Item -Path ("{0}\Microsoft\Windows\Virtual Hard Disks\DC01.vhdx" -f $env:
 Remove-Item -Path ("{0}\Microsoft\Windows\Virtual Hard Disks\Linux01.vhdx" -f $env:PROGRAMDATA)
 Remove-Item -Path ("{0}\Microsoft\Windows\Virtual Hard Disks\W11.vhdx" -f $env:PROGRAMDATA)
 
-Remove-Item "c:\install\ubuntu-22.10-live-server-amd64.iso"
+Remove-Item -Path "c:\install\ubuntu-22.10-live-server-amd64.iso"
 
 $vms = 'kdc01', 'lx01', 'lx02', 'adskdc01', 'win01', 'adskdc02', 'lx03'
 foreach ($vm in $vms) {
@@ -127,6 +127,7 @@ $pturl = "https://the.earth.li/~sgtatham/putty/latest/w64/{0}" -f $ptmsi
 $putty = "{0}\{1}" -f ($install, $ptmsi)
 Start-BitsTransfer -Source $pturl -Destination $putty
 Start-Process -Wait -FilePath msiexec -ArgumentList @("/passive", "/i", $putty)
+Remove-Item -Path $putty
 
 Remove-Item -Path HKCU:\Software\SimonTatham -Recurse
 New-Item -Path HKCU:\Software\SimonTatham
@@ -147,11 +148,12 @@ New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx02 -Name Host
 New-Item -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03
 New-ItemProperty -Path HKCU:\Software\SimonTatham\PuTTY\Sessions\lx03 -Name HostName -PropertyType String -Value lx03.subdom.ads.example.com
 
-$wzfile = "WinSCP-6.3.7-Setup.exe"
-$wzurl = "https://altushost-swe.dl.sourceforge.net/project/winscp/WinSCP/6.3.7/{0}" -f $wzfile
-$winzip = "{0}\{1}" -f ($install, $wzfile)
-Start-BitsTransfer -Source $wzurl -Destination $winzip
-Start-Process -Wait -FilePath $winzip -ArgumentList @("/silent", "/allusers")
+$wscpfile = "WinSCP-6.3.7-Setup.exe"
+$wscpurl = "https://altushost-swe.dl.sourceforge.net/project/winscp/WinSCP/6.3.7/{0}" -f $wscpfile
+$winscp = "{0}\{1}" -f ($install, $wscpfile)
+Start-BitsTransfer -Source $wscpurl -Destination $winscp
+Start-Process -Wait -FilePath $winscp -ArgumentList @("/silent", "/allusers")
+Remove-Item -Path $winscp
 
 Remove-Item -Path "HKCU:\Software\Martin Prikryl" -Recurse
 New-Item -Path "HKCU:\Software\Martin Prikryl"
@@ -177,6 +179,7 @@ $giturl = "https://github.com/git-for-windows/git/releases/download/v2.48.1.wind
 $git = "{0}\{1}" -f ($install, $gitfile)
 Start-BitsTransfer -Source $giturl -Destination $git
 Start-Process -Wait -FilePath $git -ArgumentList @("/verysilent")
+Remove-Item -Path $git
 
 $git = 'C:\Program Files\Git\bin\git'
 $repodir = 'c:\users\workshop\desktop\krb-ldap-ad'
