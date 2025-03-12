@@ -74,3 +74,7 @@ $sdel = "{0}\{1}" -f ($install, $sdelfile)
 Start-BitsTransfer -Source $sdelurl -Destination $sdel
 Expand-Archive -Path $sdel -DestinationPath $install
 Remove-Item -Path $sdel
+
+# allow remote desktop connections
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server"-name "fDenyTSConnections" -Value 0
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
