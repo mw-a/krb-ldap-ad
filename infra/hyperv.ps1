@@ -81,22 +81,26 @@ $adskdc02au = "{0}\adskdc02-autounattend.iso" -f $install
 
 $kdc01 = New-VM  -Generation 2 -MemoryStartupBytes 2GB -Name kdc01 -NewVHDPath "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\kdc01.vhdx" -NewVHDSizeBytes 20GB -SwitchName "LabServicesSwitch"
 $dvd = Add-VMDvdDrive -VMName $kdc01.VMName -Path $netinst -Passthru
+Set-VM -VM $kdc01 -AutomaticStopAction ShutDown -CheckpointType Disabled -SmartPagingFilePath d:\
 Set-VMFirmware -VM $kdc01 -FirstBootDevice $dvd -SecureBootTemplate MicrosoftUEFICertificateAuthority
 Set-VMNetworkAdapter -VM $kdc01 -StaticMacAddress "00:15:5d:00:05:01"
 
 $lx01 = New-VM  -Generation 2 -MemoryStartupBytes 2GB -Name lx01 -NewVHDPath "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\lx01.vhdx" -NewVHDSizeBytes 20GB -SwitchName "LabServicesSwitch"
 $dvd = Add-VMDvdDrive -VM $lx01 -Path $netinst -Passthru
+Set-VM -VM $lx01 -AutomaticStopAction ShutDown -CheckpointType Disabled -SmartPagingFilePath d:\
 Set-VMFirmware -VM $lx01 -FirstBootDevice $dvd -SecureBootTemplate MicrosoftUEFICertificateAuthority
 Set-VMNetworkAdapter -VM $lx01 -StaticMacAddress "00:15:5d:00:05:02"
 
 $lx02 = New-VM  -Generation 2 -MemoryStartupBytes 2GB -Name lx02 -NewVHDPath "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\lx02.vhdx" -NewVHDSizeBytes 20GB -SwitchName "LabServicesSwitch"
 $dvd = Add-VMDvdDrive -VM $lx02 -Path $netinst -Passthru
+Set-VM -VM $lx02 -AutomaticStopAction ShutDown -CheckpointType Disabled -SmartPagingFilePath d:\
 Set-VMFirmware -VM $lx02 -FirstBootDevice $dvd -SecureBootTemplate MicrosoftUEFICertificateAuthority
 Set-VMNetworkAdapter -VM $lx02 -StaticMacAddress "00:15:5d:00:05:03"
 
 $adskdc01 = New-VM  -Generation 2 -MemoryStartupBytes 2GB -Name adskdc01 -NewVHDPath "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\adskdc01.vhdx" -NewVHDSizeBytes 30GB -SwitchName "LabServicesSwitch"
 $dvd = Add-VMDvdDrive -VM $adskdc01 -Path $adskdcinst -Passthru
 Add-VMDvdDrive -VM $adskdc01 -Path $adskdc01au -Passthru
+Set-VM -VM $adskdc01 -AutomaticStopAction ShutDown -CheckpointType Disabled -SmartPagingFilePath d:\
 Set-VMFirmware -VM $adskdc01 -FirstBootDevice $dvd
 Set-VMNetworkAdapter -VM $adskdc01 -StaticMacAddress "00:15:5d:00:05:04"
 
@@ -108,17 +112,20 @@ Set-VMKeyProtector -VM $win01 -KeyProtector $win01kp.RawData
 Enable-VMTPM -VM $win01
 $dvd = Add-VMDvdDrive -VM $win01 -Path $wininst -Passthru
 Add-VMDvdDrive -VM $win01 -Path $win01au -Passthru
+Set-VM -VM $win01 -AutomaticStopAction ShutDown -CheckpointType Disabled -SmartPagingFilePath d:\
 Set-VMFirmware -VM $win01 -FirstBootDevice $dvd
 Set-VMNetworkAdapter -VM $win01 -StaticMacAddress "00:15:5d:00:05:05"
 
 $adskdc02 = New-VM  -Generation 2 -MemoryStartupBytes 2GB -Name adskdc02 -NewVHDPath "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\adskdc02.vhdx" -NewVHDSizeBytes 30GB -SwitchName "LabServicesSwitch"
 $dvd = Add-VMDvdDrive -VM $adskdc02 -Path $adskdcinst -Passthru
 Add-VMDvdDrive -VM $adskdc02 -Path $adskdc02au -Passthru
+Set-VM -VM $adskdc02 -AutomaticStopAction ShutDown -CheckpointType Disabled -SmartPagingFilePath d:\
 Set-VMFirmware -VM $adskdc02 -FirstBootDevice $dvd
 Set-VMNetworkAdapter -VM $adskdc02 -StaticMacAddress "00:15:5d:00:05:06"
 
 $lx03 = New-VM  -Generation 2 -MemoryStartupBytes 2GB -Name lx03 -NewVHDPath "C:\ProgramData\Microsoft\Windows\Virtual Hard Disks\lx03.vhdx" -NewVHDSizeBytes 20GB -SwitchName "LabServicesSwitch"
 $dvd = Add-VMDvdDrive -VM $lx03 -Path $netinst -Passthru
+Set-VM -VM $lx03 -AutomaticStopAction ShutDown -CheckpointType Disabled -SmartPagingFilePath d:\
 Set-VMFirmware -VM $lx03 -FirstBootDevice $dvd -SecureBootTemplate MicrosoftUEFICertificateAuthority
 Set-VMNetworkAdapter -VM $lx03 -StaticMacAddress "00:15:5d:00:05:07"
 
