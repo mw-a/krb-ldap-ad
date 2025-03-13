@@ -36,7 +36,5 @@ use_fully_qualified_names = False
 EOF
 chmod 0600 /etc/sssd/sssd.conf
 
-systemctl stop sssd
-rm -vf /var/lib/sssd/*/*
-systemctl start sssd
+sssctl cache-remove -ops
 systemctl enable sssd

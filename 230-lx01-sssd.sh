@@ -65,7 +65,5 @@ kdestroy
 
 sleep 3
 
-rm -vf /var/lib/sssd/*/*
-
-systemctl start sssd
+sssctl cache-remove -ops
 systemctl enable sssd
