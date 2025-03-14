@@ -2,10 +2,6 @@
 
 [ `hostname -s` != 'lx02' ] && exit 1
 
-# WORKAROUND for https://gitlab.freedesktop.org/realmd/adcli/-/issues/40
-# Can go once Windows Server 2025 is fixed.
-workaround_opt=--ldap-passwd
-
 for i in {10..99} ; do
     mkdir -p /srv/home/user$i /srv/home/adsuser$i /srv/home/subuser$i
     chown user$i:group$i /srv/home/user$i
@@ -55,7 +51,10 @@ SID=`net rpc getsid -S adskdc01 |awk '{print $3}'`
 
 tdbtool /var/lib/samba/private/secrets.tdb store SECRETS/MACHINE_LAST_CHANGE_TIME/ADS '\A5\0\0\0'
 tdbtool /var/lib/samba/private/secrets.tdb store SECRETS/MACHINE_PASSWORD/ADS 'dummy\0'
-adcli update --add-samba-data --computer-password-lifetime=0 $workaround_opt
+# WORKAROUND for https://gitlab.freedesktop.org/realmd/adcli/-/issues/40
+# Can go once Windows Server 2025 is fixed.
+#adcli update --add-samba-data --computer-password-lifetime=0
+echo P@ssw0rd | adcli join -D ads.example.com -U administrator --add-samba-data --stdin-password --ldap-passwd
 
 systemctl start smbd.service
 systemctl start nmbd.service
