@@ -17,9 +17,12 @@ for i in {10..99} ; do
 done
 chmod 0700 /srv/home/*user*
 
-echo P@ssw0rd | kinit Administrator || exit 1
-msktutil --update --enctypes 0x10 --set-samba-secret --service nfs
-kdestroy
+# WORKAROUND for https://gitlab.freedesktop.org/realmd/adcli/-/issues/40
+# Can go once Windows Server 2025 is fixed.
+#echo P@ssw0rd | kinit Administrator || exit 1
+#msktutil --update --enctypes 0x10 --set-samba-secret --service nfs
+#kdestroy
+echo P@ssw0rd | adcli join -D ads.example.com -U administrator --add-samba-data --service-name=nfs --stdin-password --ldap-passwd
 
 cat > /etc/exports <<EOF
 /srv/home *(rw,subtree_check,sec=krb5)
